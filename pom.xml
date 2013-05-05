@@ -1,0 +1,64 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>nfcs</groupId>
+	<artifactId>parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>parent</name>
+
+	<url>http://nfsrepschedule.sourceforge.net/</url>
+	<scm>
+		<connection>https://nfsrepschedule.svn.sourceforge.net/svnroot/nfsrepschedule/trunk</connection>
+		<developerConnection>https://nfsrepschedule.svn.sourceforge.net/svnroot/nfsrepschedule/trunk</developerConnection>
+		<url>https://nfsrepschedule.svn.sourceforge.net/svnroot/nfsrepschedule/trunk</url>
+	</scm>
+
+	<modules>
+		<module>jpa</module>
+		<module>ejb</module>
+		<module>web</module>
+		<module>nfcs</module>
+	</modules>
+	<repositories>
+		<repository>
+			<id>EclipseLink Repo</id>
+			<url>http://www.eclipse.org/downloads/download.php?r=1&amp;nf=1&amp;file=/rt/eclipselink/maven.repo</url>
+			<!-- use this for javax.persistence <snapshots> <enabled>true</enabled> 
+				</snapshots> -->
+		</repository>
+		<repository>
+			<id>glassfish</id>
+			<name>Maven Repository Glassfish</name>
+			<layout>default</layout>
+			<url>http://download.java.net/maven/glassfish</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>JBoss Repo</id>
+			<url>http://repository.jboss.org/nexus/content/groups/public/</url>
+			<!-- use this for javax.persistence <snapshots> <enabled>true</enabled> 
+				</snapshots> -->
+		</repository>
+		<repository>
+			<id>Maven repo1</id>
+			<url>http://repo1.maven.org/maven2/</url>
+		</repository>
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>Maven repo1</id>
+			<url>http://repo1.maven.org/maven2/</url>
+		</pluginRepository>
+	</pluginRepositories>
+</project>

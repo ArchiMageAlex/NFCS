@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="NFCSHibernateJPAPostgres"
+		transaction-type="JTA">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<jta-data-source>java:jboss/datasources/nfcs</jta-data-source>
+		<class>nfcs.model.schedule.Schedule</class>
+		<class>nfcs.model.User</class>
+		<class>nfcs.model.Transport</class>
+		<class>nfcs.model.Subject</class>
+		<class>nfcs.model.Role</class>
+		<class>nfcs.model.Report</class>
+		<class>nfcs.model.Organization</class>
+		<class>nfcs.model.EmailTransport</class>
+		<class>nfcs.model.Department</class>
+		<class>nfcs.model.Colleague</class>
+		<class>nfcs.model.core.BaseEntity</class>
+		
+		<properties>
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.archive.autodetection" value="class" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+			<property name="hibernate.connection.username" value="postgres" />
+			<property name="hibernate.connection.password" value="postgres" />
+		</properties>
+	</persistence-unit>
+</persistence> 

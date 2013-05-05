@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<h:head>
+	</h:head>
+	<body>
+		<ui:composition template="/WEB-INF/templates/base.xhtml">
+			<ui:define name="content_center">
+				<p:layout fullPage="false" widgetVar="layout">
+					<p:layoutUnit position="north" height="70">
+						<h3>NFC System welcomes You, #{loginBean.login}</h3>
+						<p:ajaxStatus style="height:24px;display:block;">
+							<f:facet name="start">
+								<h:graphicImage value="..\design\ajaxstatus.gif" />
+							</f:facet>
+
+							<f:facet name="complete">
+								<h:outputText value="" />
+							</f:facet>
+						</p:ajaxStatus>
+					</p:layoutUnit>
+					<p:layoutUnit position="west" width="200" header="Представления"
+						resizable="true" collapsible="true" minWidth="200"
+						scrollable="null">
+						<p:accordionPanel effect="bounceslide" autoHeight="false">
+							<p:tab title="Задачи на сегодня">
+						Задачи на сегодня
+					</p:tab>
+							<p:tab title="Следующие задачи">
+						Задачи на потом
+					</p:tab>
+							<p:tab title="Закрытые задачи">
+						Задачи уже сделаны
+					</p:tab>
+							<p:tab title="Все задачи">
+						Задачи все
+					</p:tab>
+						</p:accordionPanel>
+					</p:layoutUnit>
+					<p:layoutUnit position="center" header="Планировщик"
+						scrollable="true">
+						<h:form>
+							<p:growl id="messages" showDetail="true" />
+							<p:schedule value="#{scheduleController.eventModel}"
+								editable="true" widgetVar="myschedule"
+								eventSelectListener="#{scheduleController.onEventSelect}"
+								dateSelectListener="#{scheduleController.onDateSelect}"
+								eventMoveListener="#{scheduleController.onEventMove}"
+								eventResizeListener="#{scheduleController.onEventResize}"
+								onDateSelectUpdate="eventDetails messages"
+								onEventMoveUpdate="messages"
+								onDateSelectComplete="eventDialog.show()"
+								onEventResizeUpdate="messages"
+								onEventSelectUpdate="eventDetails messages"
+								onEventSelectComplete="eventDialog.show()" resizable="true"
+								aspectRatio="3" firstHour="8" locale="ru" view="agendaWeek"
+								startWeekday="1">
+							</p:schedule>
+							<p:dialog widgetVar="eventDialog" header="Подробности:"
+								showEffect="clip" hideEffect="clip" width="420">
+								<h:panelGrid id="eventDetails" columns="2">
+									<h:outputLabel for="title" value="Название:" />
+									<p:inputText id="title"
+										value="#{scheduleController.event.title}" />
+
+									<h:outputLabel for="from" value="С:" />
+									<p:calendar id="from" pattern="dd.MM.yyyy HH:mm"
+										value="#{scheduleController.event.startDate}"
+										timeZone="Asia/Vladivostok" locale="ru" mode="popup" showOn="button" navigator="true" />
+
+									<h:outputLabel for="to" value="По:" />
+									<p:calendar id="to" pattern="dd.MM.yyyy HH:mm" showOtherMonths="true"
+										value="#{scheduleController.event.endDate}"
+										timeZone="Asia/Vladivostok" locale="ru" mode="popup" showOn="button" navigator="true" />
+									<h:outputLabel for="allDay" value="Весь день:" />
+									<h:selectBooleanCheckbox id="allDay"
+										value="#{scheduleController.event.allDay}" />
+									<h:outputLabel for="executor" value="Исполнитель:" />
+									<p:autoComplete id="executor" autocomplete="true" var="executor"
+										itemLabel="#{executor.name}"
+										itemValue="#{executor}" value="#{scheduleController.event.executor}"
+										completeMethod="#{scheduleController.completeColleagues}"></p:autoComplete>
+									<p:commandButton value="Сохранить"
+										actionListener="#{scheduleController.addEvent}"
+										oncomplete="myschedule.update();eventDialog.hide();" />
+									<p:commandButton value="Отменить"
+										oncomplete="eventDialog.hide();" />
+									<p:commandButton value="Удалить"
+										actionListener="#{scheduleController.deleteEvent}"
+										oncomplete="myschedule.update();eventDialog.hide();" />
+								</h:panelGrid>
+							</p:dialog>
+						</h:form>
+
+					</p:layoutUnit>
+					<p:layoutUnit position="east" header="Подробности:"
+						scrollable="true" resizable="true" collapsible="true"
+						collapsed="true" id="rightLayoutUnit" width="400">
+
+					</p:layoutUnit>
+				</p:layout>
+			</ui:define>
+		</ui:composition>
+	</body>
+</html>

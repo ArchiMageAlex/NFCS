@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:cc="http://java.sun.com/jsf/composite/components">
+<h:head>
+	<title><ui:insert name="title">NFC System</ui:insert></title>
+</h:head>
+<body>
+	<p:layout fullPage="true">
+		<p:layoutUnit position="north" height="200" size="200"
+			resizable="true">
+			<h:form id="top_form">
+				<h:panelGrid columns="3">
+					<p:menubar model="#{menuController.menuModel}" id="menu"></p:menubar>
+					<p:themeSwitcher style="width:150px">
+						<f:selectItem itemLabel="Aristo" itemValue="aristo" />
+						<f:selectItem itemLabel="Glass-X" itemValue="glass-x" />
+						<f:selectItem itemLabel="Blitzer" itemValue="blitzer" />
+						<f:selectItem itemLabel="Midnight" itemValue="midnight" />
+						<f:selectItem itemLabel="Cupertino" itemValue="cupertino" />
+						<f:selectItem itemLabel="Casablanca" itemValue="casablanca" />
+						<f:selectItem itemLabel="dark-hive" itemValue="dark-hive" />
+						<f:selectItem itemLabel="dot-luv" itemValue="dot-luv" />
+						<f:selectItem itemLabel="eggplant" itemValue="eggplant" />
+						<f:selectItem itemLabel="excite-bike" itemValue="excite-bike" />
+						<f:selectItem itemLabel="flick" itemValue="flick" />
+						<f:selectItem itemLabel="glass-x" itemValue="glass-x" />
+						<f:selectItem itemLabel="hot-sneaks" itemValue="hot-sneaks" />
+						<f:selectItem itemLabel="humanity" itemValue="humanity" />
+						<f:selectItem itemLabel="le-frog" itemValue="le-frog" />
+						<f:selectItem itemLabel="midnight" itemValue="midnight" />
+						<f:selectItem itemLabel="mint-choc" itemValue="mint-choc" />
+						<f:selectItem itemLabel="overcast" itemValue="overcast" />
+						<f:selectItem itemLabel="pepper-grinder"
+							itemValue="pepper-grinder" />
+						<f:selectItem itemLabel="redmond" itemValue="redmond" />
+						<f:selectItem itemLabel="rocket" itemValue="rocket" />
+						<f:selectItem itemLabel="sam" itemValue="sam" />
+						<f:selectItem itemLabel="smoothness" itemValue="smoothness" />
+						<f:selectItem itemLabel="south-street" itemValue="south-street" />
+						<f:selectItem itemLabel="start" itemValue="start" />
+						<f:selectItem itemLabel="sunny" itemValue="sunny" />
+						<f:selectItem itemLabel="swanky-purse" itemValue="swanky-purse" />
+						<f:selectItem itemLabel="trontastic" itemValue="trontastic" />
+						<f:selectItem itemLabel="ui-darkness" itemValue="ui-darkness" />
+						<f:selectItem itemLabel="ui-lightness" itemValue="ui-lightness" />
+						<f:selectItem itemLabel="vader" itemValue="vader" />
+
+					</p:themeSwitcher>
+					<cc:login login="#{loginBean.validate()}"
+						success="/admin/welcome.xhtml?faces-redirect=true"
+						bean="#{loginBean}"></cc:login>
+				</h:panelGrid>
+			</h:form>
+		</p:layoutUnit>
+		<p:layoutUnit position="center">
+			<p:layout style="width:1050px;height:800px;">
+				<p:layoutUnit position="west" size="150">
+				</p:layoutUnit>
+				<p:layoutUnit position="center">
+					<h:form id="crud">
+						<p:layout style="width:98%;height:800px;">
+							<p:layoutUnit position="north" resizable="true"
+								collapsible="true" minSize="150">
+								<ui:insert name="content_top" />
+							</p:layoutUnit>
+							<p:layoutUnit position="center">
+								<ui:insert name="content_center" />
+							</p:layoutUnit>
+						</p:layout>
+					</h:form>
+				</p:layoutUnit>
+			</p:layout>
+		</p:layoutUnit>
+		<p:layoutUnit position="south">
+			<ui:include src="/WEB-INF/templates/footer.xhtml" />
+		</p:layoutUnit>
+	</p:layout>
+</body>
+</html>

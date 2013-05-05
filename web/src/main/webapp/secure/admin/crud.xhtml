@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:m="http://metawidget.org/faces">
+
+<ui:composition template="/WEB-INF/templates/base.xhtml">
+	<ui:define name="content_top">
+		<h:panelGrid >
+			<p:toolbar id="toolbar">
+				<p:toolbarGroup id="crud_toolbar" align="left">
+					<p:commandButton type="push" title="Создать" 
+						icon="ui-icon-document" update=":crud:panel :crud:toolbar"
+						id="create" action="#{entityController.create}" onstart="" />
+					<p:commandButton type="push" title="Сохранить" 
+						icon="ui-icon-disk" update=":crud:table :crud:toolbar :crud:panel" id="save"
+						action="#{entityController.save}"
+						disabled="#{entityController.currentEntity == null}" />
+					<p:commandButton type="push" title="Удалить" icon="ui-icon-trash"
+						update=":crud:table :crud:toolbar :crud:panel" id="delete"
+						action="#{entityController.delete}"
+						disabled="#{entityController.currentEntity == null}" />
+					<p:commandButton type="push" title="Напечатать"
+						icon="ui-icon-print" />
+				</p:toolbarGroup>
+			</p:toolbar>
+			<p:dataTable value="#{entityController.entities}" var="row"
+				id="table" selectionMode="single"
+				selection="#{entityController.selection}" rowKey="#{row.id}">
+				<p:ajax event="rowSelect" update=":crud:panel :crud:toolbar"
+					listener="#{entityController.tableRowSelectListener}" />
+				<p:ajax event="rowUnselect" update=":crud:panel :crud:toolbar" />
+				<p:columns var="column" value="#{entityController.columns}"
+					columnIndexVar="colidx">
+					<f:facet name="header">#{column.header}</f:facet>
+				#{row[column.property]}
+				</p:columns>
+			</p:dataTable>
+		</h:panelGrid>
+	</ui:define>
+	<ui:define name="content_center">
+		<p:panel id="panel"
+			visible="#{entityController.currentEntity != null}">
+			<m:metawidget id="meta" value="#{entityController.currentEntity}"
+				inspectFromParent="true">
+			</m:metawidget>
+			<h:messages id="msg" for="meta" />
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

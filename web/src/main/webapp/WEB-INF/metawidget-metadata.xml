@@ -1,0 +1,19 @@
+<inspection-result xmlns="http://metawidget.org/inspection-result"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0"
+	xsi:schemaLocation="http://metawidget.org/inspection-result
+		http://metawidget.org/xsd/inspection-result-1.0.xsd">
+
+	<entity type="com.myapp.Person">
+		<property name="name" />
+		<property name="age" />
+		<property name="retired" hidden="true" />
+		<property name="gender" />
+		<property name="notes" large="true" />
+		<property name="employer" section="Work" />
+		<property name="department" />
+	</entity>
+	<entity type="nfcs.model.BaseEntity">
+		<property name="id" hidden="true" />
+	</entity>
+
+</inspection-result>

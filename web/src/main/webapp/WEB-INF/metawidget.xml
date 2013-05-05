@@ -1,0 +1,52 @@
+<metawidget xmlns="http://metawidget.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	version="1.0"
+	xsi:schemaLocation="http://metawidget.org http://metawidget.org/xsd/metawidget-1.0.xsd">
+
+	<htmlMetawidget xmlns="java:org.metawidget.faces.component.html">
+		<inspector>
+			<compositeInspector xmlns="java:org.metawidget.inspector.composite"
+				config="CompositeInspectorConfig">
+				<inspectors>
+					<array>
+						<propertyTypeInspector
+							xmlns="java:org.metawidget.inspector.propertytype" />
+						<metawidgetAnnotationInspector
+							xmlns="java:org.metawidget.inspector.annotation" />
+						<java5Inspector xmlns="java:org.metawidget.inspector.java5" />
+						<facesAnnotationInspector xmlns="java:org.metawidget.inspector.faces" />
+						<jpaInspector xmlns="java:org.metawidget.inspector.jpa" />
+						<xmlInspector xmlns="java:org.metawidget.inspector.xml"
+							config="XmlInspectorConfig" />
+					</array>
+				</inspectors>
+			</compositeInspector>
+		</inspector>
+		<widgetBuilder>
+			<compositeWidgetBuilder xmlns="java:org.metawidget.widgetbuilder.composite"
+				config="CompositeWidgetBuilderConfig">
+				<widgetBuilders>
+					<array>
+						<overriddenWidgetBuilder
+							xmlns="java:org.metawidget.faces.component.widgetbuilder" />
+						<readOnlyWidgetBuilder
+							xmlns="java:org.metawidget.faces.component.html.widgetbuilder" />
+						<primeFacesWidgetBuilder
+							xmlns="java:org.metawidget.faces.component.html.widgetbuilder.primefaces" />
+						<htmlWidgetBuilder
+							xmlns="java:org.metawidget.faces.component.html.widgetbuilder" />
+					</array>
+				</widgetBuilders>
+			</compositeWidgetBuilder>
+		</widgetBuilder>
+		<layout>
+			<tabViewLayoutDecorator
+				xmlns="java:org.metawidget.faces.component.html.layout.primefaces"
+				config="org.metawidget.layout.decorator.LayoutDecoratorConfig">
+				<layout>
+					<simpleLayout xmlns="java:org.metawidget.faces.component.layout" />
+				</layout>
+			</tabViewLayoutDecorator>
+		</layout>
+	</htmlMetawidget>
+
+</metawidget>
