@@ -67,15 +67,15 @@ public class LoginBean implements Serializable {
 				return encPassword;
 			} catch (NoSuchAlgorithmException e) {
 				FacesContext.getCurrentInstance().addMessage(
-						"Ошибка расшифровки",
-						new FacesMessage("Не найдена реализация алгоритма "
+						"пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+						new FacesMessage("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ "
 								+ alg));
 				e.printStackTrace();
 			} catch (UnsupportedEncodingException e) {
 				FacesContext.getCurrentInstance().addMessage(
-						"Ошибка кодировки",
-						new FacesMessage("Кодировка " + charsetName
-								+ " не поддерживается"));
+						"пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+						new FacesMessage("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ " + charsetName
+								+ " пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"));
 				e.printStackTrace();
 				e.printStackTrace();
 			}
@@ -94,6 +94,7 @@ public class LoginBean implements Serializable {
 
 		try {
 			if (request.getUserPrincipal() == null) {
+        System.out.println(this.login + "/" + this.password);
 				request.login(this.login, this.password);
 			}
 
