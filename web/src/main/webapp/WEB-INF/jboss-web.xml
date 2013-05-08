@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jboss-web version="6.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.jboss.com/xml/ns/javaee" xsi:schemaLocation="http://www.jboss.com/xml/ns/javaee http://www.jboss.org/schema/jbossweb/jboss-web_6_0.xsd">
     <!-- Use the JaasSecurityMgr other security domain for authentication
-      and authorization of secured web content.
-    <security-domain>Database</security-domain> -->
+      and authorization of secured web content.-->
+    <security-domain>Database</security-domain>
     
 </jboss-web>
