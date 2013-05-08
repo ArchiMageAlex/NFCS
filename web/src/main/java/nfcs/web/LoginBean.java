@@ -68,7 +68,7 @@ public class LoginBean implements Serializable {
 			} catch (NoSuchAlgorithmException e) {
 				FacesContext.getCurrentInstance().addMessage(
 						"������ �����������",
-						new FacesMessage("�� ������� ���������� ��������� "
+						new FacesMessage("�� ������� ���������� ��������� " 
 								+ alg));
 				e.printStackTrace();
 			} catch (UnsupportedEncodingException e) {
