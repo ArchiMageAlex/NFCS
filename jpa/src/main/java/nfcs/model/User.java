@@ -31,7 +31,7 @@ public class User extends BaseEntity implements Serializable {
 	public User() {
 	}
 
-	@UiLabel("Имя пользователя")
+	@UiLabel("пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ")
 	public String getName() {
 		return this.name;
 	}
@@ -49,8 +49,8 @@ public class User extends BaseEntity implements Serializable {
 		this.password = password;
 	}
 
-	@UiLabel("Роли")
-	@ManyToMany(cascade = { CascadeType.PERSIST }, mappedBy = "users")
+	@UiLabel("пїЅпїЅпїЅпїЅ")
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "users")
 	public List<Role> getRoles() {
 		return this.roles;
 	}

@@ -31,7 +31,7 @@ public class ApplicationAssistant {
 
 		if (!isAdminUserExists) {
 			System.out
-					.println("Не создана учетная запись администратора по-умолчанию. Создается User(name=admin,password=admin,roles={name=admin}");
+					.println("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ User(name=admin,password=admin,roles={name=admin}");
 			User user = new User();
 			user.setName("admin");
 			user.setPassword("admin");
