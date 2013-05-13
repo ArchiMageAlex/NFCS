@@ -42,7 +42,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
               <webModule>
                 <groupId>nfcs</groupId>
                 <artifactId>web</artifactId>
-                <contextRoot>/web1</contextRoot>
+                <contextRoot>/web</contextRoot>
               </webModule>
             </modules>
           </configuration>
