@@ -12,7 +12,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
           <artifactId>maven-ear-plugin</artifactId>
           <version>2.6</version>
           <configuration>
-            <version>6</version> <!---  Java 67EE spec version???? -->
+            <version>6</version> <!---  Java 67EE spec version????  -->
             <outputdirectory>../../deployments</outputdirectory>
             <modules>
               <ejbModule>
