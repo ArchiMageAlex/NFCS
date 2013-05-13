@@ -31,7 +31,7 @@ public class ApplicationAssistant {
 
 		if (!isAdminUserExists) {
 			System.out
-					.println("�� ������� ������� ������ �������������� ��-���������. ��������� User(name=admin,password=admin,roles={name=admin}");
+					.println("Default admin role and user not found. Creating User(name=admin,password=admin,roles={name=admin}).");
 			User user = new User();
 			user.setName("admin");
 			user.setPassword("admin");
