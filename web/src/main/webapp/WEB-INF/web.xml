@@ -66,7 +66,7 @@
   <error-page>
     <exception-type>javax.faces.application.ViewExpiredException</exception-type>
     <location>/login.xhtml</location>
-  </error-page><
+  </error-page>
   <security-constraint>
     <web-resource-collection>
       <web-resource-name>secured</web-resource-name>
@@ -86,5 +86,5 @@
   </login-config>
   <security-role>
     <role-name>admin</role-name>
-  </security-role>-->
+  </security-role>
 </web-app>
