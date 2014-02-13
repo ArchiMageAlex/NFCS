@@ -28,7 +28,7 @@ public class Menu extends BaseEntity implements Serializable {
 	}
 
 	@Column(nullable = false)
-	@UiLabel("Название пункта")
+	@UiLabel("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ")
 	public String getName() {
 		return this.name;
 	}
@@ -37,7 +37,7 @@ public class Menu extends BaseEntity implements Serializable {
 		this.name = Name;
 	}
 
-	@UiLabel("Название сущности")
+	@UiLabel("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ")
 	public String getEntityName() {
 		return this.entityName;
 	}
@@ -48,7 +48,7 @@ public class Menu extends BaseEntity implements Serializable {
 
 	@ManyToOne()
 	@UiFacesLookup(value = "#{entityController.getForLookup('nfcs.model.core.Menu')}", itemLabel = "#{menu.name}", itemValue = "#{menu.id}", var = "menu")
-	@UiLabel("Родительский пункт")
+	@UiLabel("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ")
 	public Menu getParent() {
 		return parent;
 	}
