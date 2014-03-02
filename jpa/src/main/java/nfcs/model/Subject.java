@@ -15,6 +15,7 @@ import nfcs.model.core.BaseEntity;
  */
 @Entity
 @NamedQueries({	@NamedQuery(name = "findSubjectByName", query = "select c from Subject c where c.name = :name")})
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Subject extends BaseEntity implements Serializable {
 	private String name;
 	private Report schedules;
@@ -26,7 +27,7 @@ public class Subject extends BaseEntity implements Serializable {
 	}
 
 	@Column
-	@UiLabel("Название/Имя")
+	@UiLabel("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ/пїЅпїЅпїЅ")
 	public String getName() {
 		return this.name;
 	}
@@ -41,13 +42,13 @@ public class Subject extends BaseEntity implements Serializable {
 
 	@ManyToOne(optional = true, cascade={CascadeType.ALL})
 	@JoinColumn(name = "schedules", nullable = true)
-	@UiLabel("Задачи")
+	@UiLabel("пїЅпїЅпїЅпїЅпїЅпїЅ")
 	public Report getSchedules() {
 		return schedules;
 	}
 
 	@OneToMany(mappedBy="subject", cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
-	@UiLabel("Контакты")
+	@UiLabel("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ")
 	public List<Transport> getContacts() {
 		return contacts;
 	}

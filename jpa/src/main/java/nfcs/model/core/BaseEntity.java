@@ -21,7 +21,7 @@ import org.metawidget.inspector.faces.UiFacesLookup;
  * 
  */
 @Entity
-@DiscriminatorColumn(name = "DTYPE")
+//@DiscriminatorColumn(name = "DTYPE")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Access(AccessType.PROPERTY)
 public class BaseEntity implements Serializable {
@@ -48,13 +48,13 @@ public class BaseEntity implements Serializable {
 		} catch (ParseException e) {
 			e.printStackTrace();
 			throw new Error(
-					"Невозможно установить дату окончания жизни объекта "
-							+ this.getId().toString() + " класса "
+					"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ "
+							+ this.getId().toString() + " пїЅпїЅпїЅпїЅпїЅпїЅ "
 							+ this.getClass().getName());
 		}
 	}
 
-	@UiLabel("Идентификатор")
+	@UiLabel("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ")
 	@UiHidden
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -67,7 +67,7 @@ public class BaseEntity implements Serializable {
 	}
 
 	@UiFacesDateTimeConverter(locale = "ru_RU", timeZone = "Asia/Vladivostok", pattern = "dd.MM.yyyy")
-	@UiLabel("Дата и время создания")
+	@UiLabel("пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ")
 	@Temporal(value = TemporalType.TIMESTAMP)
 	@UiAttributes({ @UiAttribute(name = "lang", value = "ru") })
 	public Date getCreatedOn() {
@@ -79,7 +79,7 @@ public class BaseEntity implements Serializable {
 	}
 
 	@UiFacesLookup(value = "#{entityController.getForLookup('nfcs.model.Colleague')}", itemLabel = "#{colleague.name}", itemValue = "#{colleague.id}", var = "colleague")
-	@UiLabel("Создатель")
+	@UiLabel("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ")
 	@OneToOne(cascade = { CascadeType.DETACH })
 	public Colleague getCreatedBy() {
 		return this.createdBy;
@@ -90,7 +90,7 @@ public class BaseEntity implements Serializable {
 	}
 
 	@UiFacesDateTimeConverter(locale = "ru_RU", timeZone = "Asia/Vladivostok", pattern = "dd.MM.yyyy")
-	@UiLabel("Действует с")
+	@UiLabel("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ")
 	@Temporal(value = TemporalType.TIMESTAMP)
 	public Date getValidFrom() {
 		return this.validFrom;
@@ -101,7 +101,7 @@ public class BaseEntity implements Serializable {
 	}
 
 	@UiFacesDateTimeConverter(locale = "ru_RU", timeZone = "Asia/Vladivostok", pattern = "dd.MM.yyyy")
-	@UiLabel("Действует по")
+	@UiLabel("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ")
 	@Temporal(value = TemporalType.TIMESTAMP)
 	public Date getValidTo() {
 		return this.validTo;
