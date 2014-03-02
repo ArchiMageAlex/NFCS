@@ -32,7 +32,7 @@ import javax.ejb.*;
 @Stateless
 public class EJB implements Serializable {
 	private static final long serialVersionUID = 1L;
-	@PersistenceContext(type = PersistenceContextType.EXTENDED)
+	@PersistenceContext//(type = PersistenceContextType.EXTENDED)
 	protected EntityManager em;
 	@Resource
 	private SessionContext ctx;
