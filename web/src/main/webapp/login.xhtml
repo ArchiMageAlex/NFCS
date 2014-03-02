@@ -14,7 +14,7 @@
 		<ui:define name="content_center">
 			<p:panel>
 				<cc:login login="#{loginBean.validate()}"
-					success="/admin/welcome.xhtml?faces-redirect=true"
+					success="/secure/welcome.xhtml?faces-redirect=true"
 					bean="#{loginBean}"></cc:login>
 				<h2>
 					<h:outputText id="output" value="#{loginBean.login}" />

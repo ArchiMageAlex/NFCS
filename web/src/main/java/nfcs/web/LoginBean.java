@@ -94,7 +94,6 @@ public class LoginBean implements Serializable {
 
 		try {
 			if (request.getUserPrincipal() == null) {
-        System.out.println(this.login + "/" + this.password);
 				request.login(this.login, this.password);
 			}
 
@@ -113,6 +112,7 @@ public class LoginBean implements Serializable {
 			}
 			this.setLoggedIn(true);
 			String redirect = request.getRequestURI();
+            //System.out.println(this.);
 			return redirect;// "/welcome";//
 		} catch (ServletException e) {
 			User useruser = (User) userEJB.findById(User.class, 1L);

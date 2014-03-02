@@ -19,7 +19,7 @@ public class LoginComponent extends UINamingContainer {
      public LoginComponent() { 
           super(); 
      } 
-        
+
      public void actionListener(ActionEvent ae) { 
              
           FacesContext context = FacesContext.getCurrentInstance(); 

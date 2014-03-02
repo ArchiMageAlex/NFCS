@@ -52,7 +52,7 @@
 
 					</p:themeSwitcher>
 					<cc:login login="#{loginBean.validate()}"
-						success="/admin/welcome.xhtml?faces-redirect=true"
+						success="/secure/welcome.xhtml?faces-redirect=true" failure="/error.xhtml?faces-redirect=true"
 						bean="#{loginBean}"></cc:login>
 				</h:panelGrid>
 			</h:form>

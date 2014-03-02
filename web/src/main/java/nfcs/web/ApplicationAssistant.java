@@ -10,6 +10,7 @@ import javax.faces.bean.ManagedBean;
 import nfcs.model.Role;
 import nfcs.model.User;
 import nfcs.model.core.BaseEntity;
+import nfcs.model.core.Menu;
 
 //@ManagedBean(eager = true)
 @ApplicationScoped
@@ -21,6 +22,7 @@ public class ApplicationAssistant {
 	public void setup() {
 		boolean isAdminUserExists = false;
 		boolean isAdminRoleExists = false;
+        boolean isDefaultMenuExists = false;
 		Role role = null;
 
 		for (BaseEntity entity : ejb.getEntitiesOfClassByProperty(User.class,
@@ -28,6 +30,12 @@ public class ApplicationAssistant {
 			isAdminUserExists = true;
 			break;
 		}
+
+        for (BaseEntity entity : ejb.getEntitiesOfClassByProperty(Menu.class,
+                "name", "admin")) {
+            isDefaultMenuExists = true;
+            break;
+        }
 
 		if (!isAdminUserExists) {
 			System.out
@@ -56,5 +64,12 @@ public class ApplicationAssistant {
 			role.getUsers().add(user);
 			ejb.update(role);
 		}
-	}
+
+        if (!isDefaultMenuExists) {
+            System.out
+                    .println("Default menu not found. Creating default menu).");
+            Menu menu = new Menu();
+            //ejb.update(menu);
+        }
+    }
 }
