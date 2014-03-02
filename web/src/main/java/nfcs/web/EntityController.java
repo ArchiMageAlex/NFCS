@@ -7,21 +7,16 @@ import java.util.List;
 import java.util.Properties;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.ConversationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.inject.Named;
 
+import nfcs.ejb.EJB;
 import org.primefaces.component.datatable.DataTable;
 import org.primefaces.event.SelectEvent;
 
-import nfcs.ejb.EJB;
 import nfcs.model.core.BaseEntity;
 
 @ManagedBean
@@ -124,12 +119,12 @@ public class EntityController implements Serializable {
 			this.setSelection(this.getCurrentEntity());
 			updateTable(this.getCurrentEntity());
 		} catch (InstantiationException e) {
-			context.addMessage("Ошибка создания",
+			context.addMessage("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
 					new FacesMessage(e.getLocalizedMessage()));
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			context.addMessage("Ошибка создания", new FacesMessage(
-					"Невозможно вызвать конструктор по-умолчанию для класса "
+			context.addMessage("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", new FacesMessage(
+					"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ "
 							+ this.entityClass.getName()));
 			e.printStackTrace();
 		}

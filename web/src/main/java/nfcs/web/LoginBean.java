@@ -6,7 +6,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
 
-import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -17,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import nfcs.ejb.SubjectEJB;
 import nfcs.model.Colleague;
 import nfcs.model.User;
+import nfcs.ejb.*;
 
 @ManagedBean
 @SessionScoped
@@ -35,11 +35,11 @@ public class LoginBean implements Serializable {
 		this.user = user;
 	}
 
-	@EJB(name = "SubjectEJB")
+	@javax.ejb.EJB(name = "SubjectEJB")
 	private SubjectEJB colleagueEJB;
 
-	@EJB(name = "EJB")
-	private nfcs.ejb.EJB userEJB;
+	@javax.ejb.EJB(name = "EJB")
+	private EJB userEJB;
 
 	public String getLogin() {
 		return this.login;

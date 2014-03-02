@@ -27,6 +27,7 @@ import javax.persistence.metamodel.EntityType;
 
 import nfcs.model.*;
 import nfcs.model.core.BaseEntity;
+import javax.ejb.*;
 
 @Stateless
 public class EJB implements Serializable {
@@ -37,7 +38,7 @@ public class EJB implements Serializable {
 	private SessionContext ctx;
 	private Class<BaseEntity> entityClass;
 
-	public BaseEntity create(BaseEntity entity) {
+    public BaseEntity create(BaseEntity entity) {
 //		entity = em.merge(entity);
 /*		if (entity instanceof BaseEntity)
 			((BaseEntity) entity)
@@ -54,25 +55,25 @@ public class EJB implements Serializable {
 		return em.merge(entity);
 	}
 
-	@SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
 	public List<BaseEntity> find(String queryName) {
 		Query query = em.createNamedQuery(queryName);
 		return query.getResultList();
 	}
 
-	public List<BaseEntity> getAll() {
+    public List<BaseEntity> getAll() {
 		Query query = em.createQuery("select o from "
 				+ this.getEntityClass().getSimpleName() + " o");
 		return query.getResultList();
 	}
 
-	public List<BaseEntity> getAll4Class(String className) {
+    public List<BaseEntity> getAll4Class(String className) {
 		Query query = em.createQuery("select o from " + className + " o");
 		return query.getResultList();
 	}
 
-	public List<BaseEntity> getEntitiesOfClassByProperty(
-			Class vClass, String propertyName, String propertyValue) {
+    public List<BaseEntity> getEntitiesOfClassByProperty(
+            Class vClass, String propertyName, String propertyValue) {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<BaseEntity> cq = cb.createQuery(vClass);
 		Root<BaseEntity> root = cq.from(vClass);
@@ -85,20 +86,20 @@ public class EJB implements Serializable {
 		return tq.getResultList();
 	}
 
-	public void remove(BaseEntity entity) {
+    public void remove(BaseEntity entity) {
 		em.remove(em.merge(entity));
 	}
 
-	public BaseEntity update(BaseEntity entity) {
+    public BaseEntity update(BaseEntity entity) {
 		return em.merge(entity);
 	}
 
-	public BaseEntity findById(Class<? extends BaseEntity> objectClass, Long id) {
+    public BaseEntity findById(Class<? extends BaseEntity> objectClass, Long id) {
 		return (BaseEntity) em.find(objectClass, id);
 	}
 
-	public Properties getEntityProperties(
-			Class<? extends BaseEntity> entityClass) {
+    public Properties getEntityProperties(
+            Class<? extends BaseEntity> entityClass) {
 		EntityType<?> entity = em.getMetamodel().entity(entityClass);// i.next();
 		Set<?> attrs = entity.getSingularAttributes();
 		Properties props = new Properties();
@@ -152,11 +153,11 @@ public class EJB implements Serializable {
 		return props;
 	}
 
-	public Class<BaseEntity> getEntityClass() {
+    public Class<BaseEntity> getEntityClass() {
 		return entityClass;
 	}
 
-	@SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
 	public void setEntityClass(String className) {
 		try {
 			this.entityClass = (Class<BaseEntity>) Class.forName(className);

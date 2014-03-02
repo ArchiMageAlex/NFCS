@@ -11,11 +11,11 @@ import nfcs.model.Role;
 import nfcs.model.User;
 import nfcs.model.core.BaseEntity;
 
-@ManagedBean(eager = true)
+//@ManagedBean(eager = true)
 @ApplicationScoped
 public class ApplicationAssistant {
-	@EJB
-	nfcs.ejb.EJB ejb;
+	@javax.ejb.EJB(lookup = "java:app/ejb-1.0.0/EJB!nfcs.ejb.EJB")
+    nfcs.ejb.EJB ejb;
 
 	@PostConstruct
 	public void setup() {

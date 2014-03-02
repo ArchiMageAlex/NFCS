@@ -15,7 +15,7 @@ import nfcs.model.core.Menu;
 public class MenuEJB implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@PersistenceContext(type = PersistenceContextType.EXTENDED)
+	@PersistenceContext//(type = PersistenceContextType.EXTENDED)
 	private EntityManager em;
 
 	public List<Menu> getChildren(Menu menu) {
