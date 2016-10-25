@@ -6,7 +6,7 @@ System purpose - to bypass boilerplate code with concentrating on business entit
 
 Used core technologies are:
 1. JavaEE 6.x full stack.
-2. Metawidjet 3.5
+2. Metawidget 3.5
 3. JPA 2.1
 
 History
