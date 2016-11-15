@@ -25,7 +25,7 @@ public class Colleague extends Subject implements Serializable {
 		super();
 	}
 
-	@UiLabel("День рождения")
+	@UiLabel("Birthdate")
 	@Temporal(TemporalType.DATE)
 	@UiFacesDateTimeConverter(locale = "ru_RU", timeZone = "Asia/Vladivostok", pattern = "dd.MM.yyyy")
 	public Date getBirthDate() {
@@ -48,7 +48,7 @@ public class Colleague extends Subject implements Serializable {
 		return false;
 	}
 
-	@UiLabel("Подразделение")
+	@UiLabel("Department")
 	@UiFacesLookup(value = "#{entityController.getForLookup('nfcs.model.Department')}", var = "department", itemLabel = "#{department.name}", itemValue = "#{department.id}")
 	@ManyToOne
 	public Department getDepartment() {
@@ -59,7 +59,7 @@ public class Colleague extends Subject implements Serializable {
 		this.department = department;
 	}
 
-	@UiLabel("Организация")
+	@UiLabel("Organization")
 	@UiFacesLookup(value = "#{entityController.getForLookup('nfcs.model.Organization')}", var = "org", itemLabel = "#{org.name}", itemValue = "#{org.id}")
 	@ManyToOne
 	public Organization getOrganization() {

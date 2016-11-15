@@ -11,7 +11,7 @@ public class DateRange {
 
 	public Long getTicker() {
 		return ticker;
-	}
+	} 
 
 	public void setTicker(Long ticker) {
 		if(ticker == null)

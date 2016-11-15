@@ -28,7 +28,7 @@ public class Menu extends BaseEntity implements Serializable {
 	}
 
 	@Column(nullable = false)
-	@UiLabel("�������� ������")
+	@UiLabel("Menu label")
 	public String getName() {
 		return this.name;
 	}
@@ -37,7 +37,7 @@ public class Menu extends BaseEntity implements Serializable {
 		this.name = Name;
 	}
 
-	@UiLabel("�������� ��������")
+	@UiLabel("Entity name")
 	public String getEntityName() {
 		return this.entityName;
 	}
@@ -48,7 +48,7 @@ public class Menu extends BaseEntity implements Serializable {
 
 	@ManyToOne()
 	@UiFacesLookup(value = "#{entityController.getForLookup('nfcs.model.core.Menu')}", itemLabel = "#{menu.name}", itemValue = "#{menu.id}", var = "menu")
-	@UiLabel("������������ �����")
+	@UiLabel("Parent item")
 	public Menu getParent() {
 		return parent;
 	}

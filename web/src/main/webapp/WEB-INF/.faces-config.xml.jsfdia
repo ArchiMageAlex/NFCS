@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PROCESS model-entity="JSFProcess">
- <PROCESS-ITEM NAME="rules:#welcome" PATH="/welcome" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#welcome:0" NAME="item" PATH="/welcome" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="login::#login" NAME="output" PATH="/login"
-    TARGET="rules:#login" TITLE="login" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#login" PATH="/login" SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#login.xhtml" PATH="/login.xhtml"
   SHAPE="32,129,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#login.xhtml:0" NAME="item"
    PATH="/login.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="login::#welcome.xhtml" NAME="output"
-    PATH="/welcome.xhtml" TARGET="rules:#welcome.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="login::#secure#welcome.xhtml" NAME="output"
+    PATH="/secure/welcome.xhtml" TARGET="rules:#secure#welcome.xhtml"
+    TITLE="login" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#welcome.xhtml" PATH="/welcome.xhtml"
-  SHAPE="240,145,0,0" model-entity="JSFProcessGroup"/>
+  SHAPE="240,145,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#welcome.xhtml:0" NAME="item"
+   PATH="/welcome.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="login::#login.xhtml" NAME="output"
+    PATH="/login.xhtml" TARGET="rules:#login.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#secure#welcome.xhtml"
+  PATH="/secure/welcome.xhtml" SHAPE="240,257,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

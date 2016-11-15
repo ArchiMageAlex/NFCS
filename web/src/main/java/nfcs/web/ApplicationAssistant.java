@@ -3,56 +3,48 @@ package nfcs.web;
 import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import nfcs.model.Role;
 import nfcs.model.User;
 import nfcs.model.core.BaseEntity;
 import nfcs.model.core.Menu;
 
-//@ManagedBean(eager = true)
+@ManagedBean(eager = true)
 @ApplicationScoped
 public class ApplicationAssistant {
+	private static Logger logger = LoggerFactory.getLogger(ApplicationAssistant.class);
 	@javax.ejb.EJB(lookup = "java:app/ejb-1.0.0/EJB!nfcs.ejb.EJB")
-    nfcs.ejb.EJB ejb;
+	nfcs.ejb.EJB ejb;
 
 	@PostConstruct
 	public void setup() {
-		boolean isAdminUserExists = false;
+		logger.info("Start setup");
 		boolean isAdminRoleExists = false;
-        boolean isDefaultMenuExists = false;
 		Role role = null;
 
-		for (BaseEntity entity : ejb.getEntitiesOfClassByProperty(User.class,
-				"name", "admin")) {
-			isAdminUserExists = true;
-			break;
-		}
-
-        for (BaseEntity entity : ejb.getEntitiesOfClassByProperty(Menu.class,
-                "name", "admin")) {
-            isDefaultMenuExists = true;
-            break;
-        }
-
-		if (!isAdminUserExists) {
-			System.out
-					.println("Default admin role and user not found. Creating User(name=admin,password=admin,roles={name=admin}).");
+		if (0 == ejb.getEntitiesOfClassByProperty(User.class, "name", "admin").size()) {
+			logger.info(
+					"Default admin role and user not found. Creating User(name=admin,password=admin,roles={name=admin}).");
 			User user = new User();
 			user.setName("admin");
 			user.setPassword("admin");
 			user.setRoles(new ArrayList<Role>());
 
-			for (BaseEntity entity : ejb.getEntitiesOfClassByProperty(
-					Role.class, "name", "admin")) {
+			user = (User) ejb.update(user);
+			
+			for (BaseEntity entity : ejb.getEntitiesOfClassByProperty(Role.class, "name", "admin")) {
 				role = (Role) entity;
 				isAdminRoleExists = true;
 				break;
 			}
 
 			if (!isAdminRoleExists) {
+				logger.info("Default admin role not found. Creating Role(name=admin)");
 				role = new Role();
 				role.setName("admin");
 				role.setUsers(new ArrayList<User>());
@@ -65,11 +57,13 @@ public class ApplicationAssistant {
 			ejb.update(role);
 		}
 
-        if (!isDefaultMenuExists) {
-            System.out
-                    .println("Default menu not found. Creating default menu).");
-            Menu menu = new Menu();
-            //ejb.update(menu);
-        }
-    }
+		if (0 == ejb.getEntitiesOfClassByProperty(Menu.class, "name", "Пользователи").size()) {
+			logger.info("Default menu not found. Creating default menu).");
+			Menu menu = new Menu();
+			menu.setName("Пользователи");
+			menu.setEntityName("nfcs.model.User");
+			
+			ejb.update(menu);
+		}
+	}
 }

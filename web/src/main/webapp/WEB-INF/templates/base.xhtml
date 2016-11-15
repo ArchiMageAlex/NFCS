@@ -51,7 +51,7 @@
 						<f:selectItem itemLabel="vader" itemValue="vader" />
 
 					</p:themeSwitcher>
-					<cc:login login="#{loginBean.validate()}"
+					<cc:login actionMethod="#{loginBean.validate()}" login="#{loginBean.login}" password="#{loginBean.password}"
 						success="/secure/welcome.xhtml?faces-redirect=true" failure="/error.xhtml?faces-redirect=true"
 						bean="#{loginBean}"></cc:login>
 				</h:panelGrid>

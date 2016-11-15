@@ -7,27 +7,29 @@
 	xmlns:cc="http://java.sun.com/jsf/composite">
 
 <cc:interface componentType="loginComponent">
-	<cc:attribute name="login" required="true"
-		method-signature="boolean f(java.lang.String, java.lang.String)" />
-	<cc:attribute name="success" required="true" />
+	<cc:attribute name="login" required="true" />
+	<cc:attribute name="password" required="true" />
+	<cc:attribute name="actionMethod" required="true" method-signature="boolean f(java.lang.String, java.lang.String)"/>
 	<cc:attribute name="bean" required="true" />
-	<cc:attribute name="failure" required="false" />
+	<cc:attribute name="success" required = "true" />
+	<cc:attribute name="failure" required = "true" />
+	<cc:attribute name="action" required = "false" />
 </cc:interface>
 
 <cc:implementation>
-	<p:commandButton value="Выйти"
+	<p:commandButton value="Выйти" action="/welcome.xhtml?faces-redirect=true"
 		actionListener="#{cc.attrs.bean.logout()}"
 		rendered="#{cc.attrs.bean.isLoggedIn()}"></p:commandButton>
 	<p:panelGrid columns="6" rendered="#{!cc.attrs.bean.isLoggedIn()}">
-		<p:outputPanel>Логин</p:outputPanel>
+		<p:outputPanel id="usernameLabel">Логин</p:outputPanel>
 		<p:inputText id="username" name="username"
-			value="#{cc.attrs.bean.login}" required="true"
-			requiredMessage="Введите хотя бы логин" label="TestLabel" />
-		<p:outputPanel>Пароль</p:outputPanel>
-		<p:password id="password" feedback="" minLength="" name="password"
-			value="#{cc.attrs.bean.password}" />
-		<p:commandButton value="Войти" ajax="false"
-			actionListener="#{cc.attrs.login}" update="output" />
+			value="#{cc.attrs.login}" required="true"
+			requiredMessage="Введите хотя бы логин" label="usernameLabel" />
+		<p:outputPanel id="passwordLabel">Пароль</p:outputPanel>
+		<p:password id="password" minLength="" name="password" label="passwordLabel"
+			value="#{cc.attrs.password}" />
+		<p:commandButton value="Войти" ajax="false" 
+			actionListener="#{cc.attrs.actionMethod}" update="output" />
 		<p:message for="username" />
 	</p:panelGrid>
 </cc:implementation>

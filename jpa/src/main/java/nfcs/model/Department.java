@@ -24,7 +24,7 @@ public class Department extends Subject implements Serializable {
 
 	@ManyToOne(cascade = { CascadeType.DETACH }, targetEntity = Organization.class)
 	@UiFacesLookup(value = "#{entityController.getForLookup('nfcs.model.Organization')}", itemLabel = "#{org.name}", itemValue = "#{org.id}", var = "org")
-	@UiLabel("Организация")
+	@UiLabel("Organization")
 	public Organization getOrganization() {
 		return organization;
 	}
@@ -40,7 +40,7 @@ public class Department extends Subject implements Serializable {
 	}
 
 	@UiFacesLookup(value = "#{entityController.getForLookup('nfcs.model.Department')}", itemLabel = "#{dept.name}", itemValue = "#{dept.id}", var = "dept")
-	@UiLabel("Вышестоящее подразделение")
+	@UiLabel("Parent department")
 	@ManyToOne(cascade = { CascadeType.DETACH }) 
 	public Department getParentDepartment() {
 		return this.parentDepartment;
@@ -52,7 +52,7 @@ public class Department extends Subject implements Serializable {
 
 	@OneToOne(cascade = { CascadeType.DETACH })
 	@UiFacesLookup(value = "#{entityController.getForLookup('nfcs.model.Colleague')}", itemLabel = "#{chief.name}", itemValue = "#{chief.id}", var = "chief")
-	@UiLabel("Руководитель")
+	@UiLabel("Chief")
 	public Colleague getChief() {
 		return this.chief;
 	}
@@ -61,7 +61,7 @@ public class Department extends Subject implements Serializable {
 		this.chief = Chief;
 	}
 
-	@UiLabel("Сотрудники")
+	@UiLabel("Staff")
 	@OneToMany(cascade={CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH }, targetEntity=Colleague.class, mappedBy="department")
 	public List<Colleague> getColleagues() {
 		return colleagues;
@@ -72,7 +72,7 @@ public class Department extends Subject implements Serializable {
 	}
 
 	@OneToMany(cascade={CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH }, targetEntity=Department.class, mappedBy="parentDepartment")
-	@UiLabel("Нижестоящие подразделения")
+	@UiLabel("Child departments")
 	public List<Department> getChildren() {
 		return children;
 	}

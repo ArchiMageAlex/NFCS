@@ -41,7 +41,7 @@ public class Schedule extends BaseEntity implements Serializable {
 	}
 
 	public boolean compareDates(Date date1, Date date2) throws Exception {
-		throw new Exception("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+		throw new Exception("dates intersects");
 	}
 
 	public boolean isOverdue(String event, Date date) {
@@ -68,7 +68,7 @@ public class Schedule extends BaseEntity implements Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(nullable = false)
-	@UiLabel("Дата и время начала действия")
+	@UiLabel("Date begins")
 	public Date getBegins() {
 		return begins;
 	}
@@ -79,7 +79,7 @@ public class Schedule extends BaseEntity implements Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(nullable = false)
-	@UiLabel("Дата и время окончания действия")
+	@UiLabel("Date ends")
 	public Date getEnds() {
 		return ends;
 	}
@@ -89,7 +89,7 @@ public class Schedule extends BaseEntity implements Serializable {
 	}
 
 	@Column(nullable = false)
-	@UiLabel("Количество повторений")
+	@UiLabel("Repeat")
 	public Integer getRepeat() {
 		return repeat;
 	}
@@ -99,7 +99,7 @@ public class Schedule extends BaseEntity implements Serializable {
 	}
 
 	@Column(nullable = false)
-	@UiLabel("Начинается с")
+	@UiLabel("Starts from")
 	public Integer getStartFrom() {
 		return startFrom;
 	}
@@ -119,7 +119,7 @@ public class Schedule extends BaseEntity implements Serializable {
 		this.every = every;
 	}
 
-	@UiLabel("Повторять каждый/ую")
+	@UiLabel("Every ..")
 	public Integer getEvery() {
 		return every;
 	}
@@ -129,7 +129,7 @@ public class Schedule extends BaseEntity implements Serializable {
 	}
 
 	@Column(nullable = false)
-	@UiLabel("Тип периода")
+	@UiLabel("Period type")
 	public Integer getPeriodType() {
 		return periodType;
 	}

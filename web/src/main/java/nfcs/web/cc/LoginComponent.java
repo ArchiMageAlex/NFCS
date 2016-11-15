@@ -8,8 +8,12 @@ import javax.faces.component.UINamingContainer;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @FacesComponent(value="loginComponent") 
 public class LoginComponent extends UINamingContainer { 
+	private static Logger logger = LoggerFactory.getLogger(LoginComponent.class);
         
      private UIInput username; 
      private UIInput password; 
@@ -18,8 +22,9 @@ public class LoginComponent extends UINamingContainer {
         
      public LoginComponent() { 
           super(); 
+          
      } 
-
+/*
      public void actionListener(ActionEvent ae) { 
              
           FacesContext context = FacesContext.getCurrentInstance(); 
@@ -31,14 +36,14 @@ public class LoginComponent extends UINamingContainer {
              
           MethodExpression me = (MethodExpression)this.getAttributes().get("login"); 
           boolean loginSuccess = (Boolean)me.invoke(elContext, params); 
-             
+          logger.info("User: " + username.getValue() + ", password:" + password.getValue() + ", success:" + loginSuccess);
           if(loginSuccess) { 
                action = (String)getAttributes().get("success"); 
           } else { 
                action = (String)getAttributes().get("failure"); 
           } 
      } 
-        
+        */
      public String action() { 
           return action; 
      } 

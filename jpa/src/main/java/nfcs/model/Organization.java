@@ -28,7 +28,7 @@ public class Organization extends Subject implements Serializable {
 	@OneToOne(cascade = { CascadeType.DETACH })
 //	@JoinColumn(name = "chief")
 	@UiFacesLookup(value = "#{entityController.getForLookup('nfcs.model.Colleague')}", itemLabel = "#{chief.name}", itemValue = "#{chief.id}", var = "chief")
-	@UiLabel("Руководитель")
+	@UiLabel("Chief")
 	public Colleague getChief() {
 		return this.chief;
 	}
@@ -38,7 +38,7 @@ public class Organization extends Subject implements Serializable {
 	}
 
 	@OneToMany(mappedBy="organization")
-	@UiLabel("Подразделения")
+	@UiLabel("Departments")
 	public List<Department> getDepartments() {
 		return departments;
 	}
@@ -48,7 +48,7 @@ public class Organization extends Subject implements Serializable {
 	}
 
 	@OneToMany(mappedBy="organization")
-	@UiLabel("Сотрудники")
+	@UiLabel("Staff")
 	public List<Colleague> getColleagues() {
 		return colleagues;
 	}

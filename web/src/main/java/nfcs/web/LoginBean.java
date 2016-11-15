@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -13,14 +14,19 @@ import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import nfcs.ejb.SubjectEJB;
 import nfcs.model.Colleague;
 import nfcs.model.User;
+import nfcs.model.core.BaseEntity;
 import nfcs.ejb.*;
 
 @ManagedBean
 @SessionScoped
 public class LoginBean implements Serializable {
+	private static Logger logger = LoggerFactory.getLogger(LoginBean.class);
 	private static final long serialVersionUID = 1l;
 	private String login;
 	private String password;
@@ -111,21 +117,22 @@ public class LoginBean implements Serializable {
 				}
 			}
 			this.setLoggedIn(true);
-			String redirect = request.getRequestURI();
+			String redirect = request.getRequestURI() + "?faces-redirect=true";
             //System.out.println(this.);
 			return redirect;// "/welcome";//
 		} catch (ServletException e) {
-			User useruser = (User) userEJB.findById(User.class, 1L);
+			List<BaseEntity> users = userEJB.getEntitiesOfClassByProperty(User.class, "name", "admin");
+			User useruser = (User) users.get(0);
 
 			if (useruser != null) {
-				useruser.setName(this.login);
 				useruser.setPassword(this.getPassword());
-				userEJB.create(useruser);
+				userEJB.update(useruser);
 				this.setLoggedIn(true);
 				String redirect = ((HttpServletRequest) context
 						.getExternalContext().getRequest()).getRequestURI();
 				return redirect;// "/welcome";//
 			} else {
+				logger.error("Login failed for user: " + this.login);
 				this.setLoggedIn(false);
 				return "error?faces-redirect=true";
 			}
@@ -179,13 +186,19 @@ public class LoginBean implements Serializable {
 	}
 
 	public void setLoggedIn(boolean loggedIn) {
+		if(loggedIn) logger.info("Logged in user " + this.getLogin());
+		else logger.info("Logged out user " + this.getLogin());
 		this.loggedIn = loggedIn;
 	}
 	
-	public void logout() {
+	public String logout() {
 		this.setLoggedIn(false);
+		
 		this.setUser(null);
 		this.setPassword(null);
 		this.setLogin(null);
+		FacesContext context = FacesContext.getCurrentInstance();
+		return ((HttpServletRequest) context
+				.getExternalContext().getRequest()).getRequestURI();
 	}
 }

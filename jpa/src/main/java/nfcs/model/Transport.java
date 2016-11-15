@@ -12,9 +12,9 @@ public abstract class Transport extends BaseEntity implements Serializable, Tran
 	private static final long serialVersionUID = 1L;
 	private Subject subject;
 
-	public Transport() {
+	public Transport() { 
 		super();
-	}
+	} 
 
 	@Override
 	public void send() throws Exception {

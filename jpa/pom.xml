@@ -17,13 +17,21 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
 			</testResource>
 		</testResources>
 		<plugins>
+					<plugin>
+				<groupId>org.wildfly.plugins</groupId>
+				<artifactId>wildfly-maven-plugin</artifactId>
+				<version>1.0.1.Final</version>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
-					<encoding>cp1251</encoding>
+					<encoding>UTF8</encoding>
 				</configuration>
 				<version>2.3.2</version>
 			</plugin>

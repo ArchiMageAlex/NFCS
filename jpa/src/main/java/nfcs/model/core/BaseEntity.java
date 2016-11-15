@@ -21,7 +21,6 @@ import org.metawidget.inspector.faces.UiFacesLookup;
  * 
  */
 @Entity
-//@DiscriminatorColumn(name = "DTYPE")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Access(AccessType.PROPERTY)
 public class BaseEntity implements Serializable {
@@ -30,7 +29,7 @@ public class BaseEntity implements Serializable {
 	private Date createdOn;
 
 	private Colleague createdBy;
-
+ 
 	private Date validFrom;
 
 	private Date validTo;
@@ -48,13 +47,13 @@ public class BaseEntity implements Serializable {
 		} catch (ParseException e) {
 			e.printStackTrace();
 			throw new Error(
-					"���������� ���������� ���� ��������� ����� ������� "
-							+ this.getId().toString() + " ������ "
+					"Can't parse default end valid period for entity id="
+							+ this.getId().toString() + " for class="
 							+ this.getClass().getName());
 		}
 	}
 
-	@UiLabel("�������������")
+	@UiLabel("Id")
 	@UiHidden
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -67,7 +66,7 @@ public class BaseEntity implements Serializable {
 	}
 
 	@UiFacesDateTimeConverter(locale = "ru_RU", timeZone = "Asia/Vladivostok", pattern = "dd.MM.yyyy")
-	@UiLabel("���� � ����� ��������")
+	@UiLabel("Date of creation")
 	@Temporal(value = TemporalType.TIMESTAMP)
 	@UiAttributes({ @UiAttribute(name = "lang", value = "ru") })
 	public Date getCreatedOn() {
@@ -79,7 +78,7 @@ public class BaseEntity implements Serializable {
 	}
 
 	@UiFacesLookup(value = "#{entityController.getForLookup('nfcs.model.Colleague')}", itemLabel = "#{colleague.name}", itemValue = "#{colleague.id}", var = "colleague")
-	@UiLabel("���������")
+	@UiLabel("Creator")
 	@OneToOne(cascade = { CascadeType.DETACH })
 	public Colleague getCreatedBy() {
 		return this.createdBy;
@@ -90,7 +89,7 @@ public class BaseEntity implements Serializable {
 	}
 
 	@UiFacesDateTimeConverter(locale = "ru_RU", timeZone = "Asia/Vladivostok", pattern = "dd.MM.yyyy")
-	@UiLabel("��������� �")
+	@UiLabel("Valid from")
 	@Temporal(value = TemporalType.TIMESTAMP)
 	public Date getValidFrom() {
 		return this.validFrom;
@@ -101,7 +100,7 @@ public class BaseEntity implements Serializable {
 	}
 
 	@UiFacesDateTimeConverter(locale = "ru_RU", timeZone = "Asia/Vladivostok", pattern = "dd.MM.yyyy")
-	@UiLabel("��������� ��")
+	@UiLabel("Valid to")
 	@Temporal(value = TemporalType.TIMESTAMP)
 	public Date getValidTo() {
 		return this.validTo;

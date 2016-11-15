@@ -33,7 +33,7 @@ public class Report extends BaseEntity implements Serializable {
 	}
 
 	@Column(nullable = false)
-	@UiLabel("Код отчета")
+	@UiLabel("Code")
 	public String getCode() {
 		return this.code;
 	}
@@ -43,7 +43,7 @@ public class Report extends BaseEntity implements Serializable {
 	}
 
 	@Column(nullable = false)
-	@UiLabel("Название отчета")
+	@UiLabel("Name")
 	public String getName() {
 		return this.name;
 	}
@@ -59,7 +59,7 @@ public class Report extends BaseEntity implements Serializable {
 	@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH })
 	@JoinColumn(nullable = false)
-	@UiLabel("Ответственный")
+	@UiLabel("Executor")
 	@UiFacesLookup(value = "#{entityController.getForLookup('nfcs.model.Colleague')}", itemLabel = "#{executor.name}", itemValue = "#{executor.id}", var = "executor")
 	public Colleague getExecutor() {
 		return executor;
@@ -72,7 +72,7 @@ public class Report extends BaseEntity implements Serializable {
 	@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH })
 	@JoinColumn(nullable = false)
-	@UiLabel("Контролер")
+	@UiLabel("Controller")
 	@UiFacesLookup(value = "#{entityController.getForLookup('nfcs.model.Colleague')}", itemLabel = "#{controller.name}", itemValue = "#{controller.id}", var = "controller")
 	public Colleague getController() {
 		return controller;
@@ -80,7 +80,7 @@ public class Report extends BaseEntity implements Serializable {
 
 	@OneToOne(mappedBy="report", cascade={ CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH })
-	@UiLabel("Расписание")
+	@UiLabel("Schedule")
 	public Schedule getSchedule() {
 		return schedule;
 	}
@@ -90,7 +90,7 @@ public class Report extends BaseEntity implements Serializable {
 	}
 
 	@ManyToMany(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	@UiLabel("Получатели")
+	@UiLabel("Destinations")
 	@UiFacesLookup(value = "#{entityController.getForLookup('nfcs.model.Transport')}", itemLabel = "#{transport.name}", itemValue = "#{transport.id}", var = "transport")
 	public List<Transport> getDestinations() {
 		return destinations;
@@ -100,7 +100,7 @@ public class Report extends BaseEntity implements Serializable {
 		this.destinations = destinations;
 	}
 
-	@UiLabel("Приоритет (больше-выше)")
+	@UiLabel("Priority")
 	public Integer getPriority() {
 		return priority;
 	}
@@ -109,7 +109,7 @@ public class Report extends BaseEntity implements Serializable {
 		this.priority = priority;
 	}
 
-	@UiLabel("Предыдущий отчет")
+	@UiLabel("Previous report")
 	@OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH })
 	@UiFacesLookup(value = "#{entityController.getForLookup('nfcs.model.Report')}", itemLabel = "#{report.name}", itemValue = "#{report.id}", var = "report")

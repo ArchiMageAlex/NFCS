@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 public class EmailTransport extends Transport implements Serializable { 
-	private String eMail;
+	private String eMail; 
 
 	private static final long serialVersionUID = 1L;
 

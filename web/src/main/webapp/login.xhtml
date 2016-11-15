@@ -13,9 +13,9 @@
 	<ui:composition template="/WEB-INF/templates/base.xhtml">
 		<ui:define name="content_center">
 			<p:panel>
-				<cc:login login="#{loginBean.validate()}"
-					success="/secure/welcome.xhtml?faces-redirect=true"
-					bean="#{loginBean}"></cc:login>
+					<cc:login actionMethod="#{loginBean.validate()}" login="#{loginBean.login}" password="#{loginBean.password}"
+						success="/secure/welcome.xhtml?faces-redirect=true" failure="/error.xhtml?faces-redirect=true"
+						bean="#{loginBean}"></cc:login>
 				<h2>
 					<h:outputText id="output" value="#{loginBean.login}" />
 				</h2>

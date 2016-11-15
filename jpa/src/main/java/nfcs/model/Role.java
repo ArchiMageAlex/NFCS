@@ -33,7 +33,7 @@ public class Role extends BaseEntity implements Serializable {
     public Role() {
     }
 
-    @UiLabel("Название")
+    @UiLabel("Name")
 	public String getName() {
 		return this.name;
 	}
@@ -42,7 +42,7 @@ public class Role extends BaseEntity implements Serializable {
 		this.name = name;
 	}
 
-	@UiLabel("Пользователи")
+	@UiLabel("Users")
 	@ManyToMany
 	public List<User> getUsers() {
 		return this.users;
