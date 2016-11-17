@@ -19,6 +19,15 @@
 							<!-- <hostname>192.168.99.100</hostname> -->
 							<password>admin</password>
 							<skip>false</skip>
+							<jboss-home>~/NFCS/nfcs/wildfly-run/wildfly-10.1.0.Final</jboss-home>
+							<add-user>
+								<users>
+									<user>
+										<username>admin</username>
+										<password>admin</password>
+									</user>
+								</users>
+							</add-user>
 							<commands>
 								<command>module add --name=org.postgres
 									--resources=postgresql-9.4.1212.jar
@@ -39,6 +48,19 @@
 									users.id=roles_users.users_id where users.name=?")]}])</command>
 							</commands>
 						</configuration>
+						                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>deploy-artifact</goal>
+                        </goals>
+                        <configuration>
+                            <groupId>postgresql</groupId>
+                            <artifactId>postgresql</artifactId>
+                            <name>postgresql.jar</name>
+                        </configuration>
+                    </execution>
+                </executions>
 					</plugin>
 					<plugin>
 						<artifactId>maven-ear-plugin</artifactId>
