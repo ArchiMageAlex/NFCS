@@ -56,14 +56,5 @@ public class ApplicationAssistant {
 			role.getUsers().add(user);
 			ejb.update(role);
 		}
-
-		if (0 == ejb.getEntitiesOfClassByProperty(Menu.class, "name", "Пользователи").size()) {
-			logger.info("Default menu not found. Creating default menu).");
-			Menu menu = new Menu();
-			menu.setName("Пользователи");
-			menu.setEntityName("nfcs.model.User");
-			
-			ejb.update(menu);
-		}
 	}
 }

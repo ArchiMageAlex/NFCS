@@ -9,13 +9,11 @@
 <h:head>
 	<title><ui:insert name="title">NFC System</ui:insert></title>
 </h:head>
-<body>
+<h:body>
 	<p:layout fullPage="true">
-		<p:layoutUnit position="north" height="200" size="200"
-			resizable="true">
+		<p:layoutUnit position="north" size="60" resizable="false">
 			<h:form id="top_form">
 				<h:panelGrid columns="3">
-					<p:menubar model="#{menuController.menuModel}" id="menu"></p:menubar>
 					<p:themeSwitcher style="width:150px">
 						<f:selectItem itemLabel="Aristo" itemValue="aristo" />
 						<f:selectItem itemLabel="Glass-X" itemValue="glass-x" />
@@ -51,34 +49,35 @@
 						<f:selectItem itemLabel="vader" itemValue="vader" />
 
 					</p:themeSwitcher>
-					<cc:login actionMethod="#{loginBean.validate()}" login="#{loginBean.login}" password="#{loginBean.password}"
-						success="/secure/welcome.xhtml?faces-redirect=true" failure="/error.xhtml?faces-redirect=true"
-						bean="#{loginBean}"></cc:login>
+					<cc:login actionMethod="#{loginBean.validate()}"
+						login="#{loginBean.login}" password="#{loginBean.password}"
+						success="/secure/welcome.xhtml?faces-redirect=true"
+						failure="/error.xhtml?faces-redirect=true" bean="#{loginBean}"></cc:login>
 				</h:panelGrid>
 			</h:form>
 		</p:layoutUnit>
+		<p:layoutUnit position="west" size="300">
+			<h:form id="left_form">
+
+				<p:panelMenu model="#{menuController.menuModel}" id="menu"></p:panelMenu>
+			</h:form>
+		</p:layoutUnit>
 		<p:layoutUnit position="center">
-			<p:layout style="width:1050px;height:800px;">
-				<p:layoutUnit position="west" size="150">
-				</p:layoutUnit>
-				<p:layoutUnit position="center">
-					<h:form id="crud">
-						<p:layout style="width:98%;height:800px;">
-							<p:layoutUnit position="north" resizable="true"
-								collapsible="true" minSize="150">
-								<ui:insert name="content_top" />
-							</p:layoutUnit>
-							<p:layoutUnit position="center">
-								<ui:insert name="content_center" />
-							</p:layoutUnit>
-						</p:layout>
-					</h:form>
-				</p:layoutUnit>
-			</p:layout>
+			<h:form id="crud">
+				<p:layout style="width:98%;height:800px;">
+					<p:layoutUnit position="north" resizable="true" collapsible="true"
+						minSize="150">
+						<ui:insert name="content_top" />
+					</p:layoutUnit>
+					<p:layoutUnit position="center">
+						<ui:insert name="content_center" />
+					</p:layoutUnit>
+				</p:layout>
+			</h:form>
 		</p:layoutUnit>
 		<p:layoutUnit position="south">
 			<ui:include src="/WEB-INF/templates/footer.xhtml" />
 		</p:layoutUnit>
 	</p:layout>
-</body>
+</h:body>
 </html>

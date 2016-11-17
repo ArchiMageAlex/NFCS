@@ -7,7 +7,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:m="http://metawidget.org/faces">
-
+	<h:head></h:head>
+<h:body>
 <ui:composition template="/WEB-INF/templates/base.xhtml">
 	<ui:define name="content_top">
 		<h:panelGrid >
@@ -28,9 +29,9 @@
 						icon="ui-icon-print" />
 				</p:toolbarGroup>
 			</p:toolbar>
-			<p:dataTable value="#{entityController.entities}" var="row"
+			<p:dataTable value="#{entityController.lazyDataModel}" var="row"
 				id="table" selectionMode="single"
-				selection="#{entityController.selection}" rowKey="#{row.id}">
+				selection="#{entityController.selection}" rowKey="#{row[id]}">
 				<p:ajax event="rowSelect" update=":crud:panel :crud:toolbar"
 					listener="#{entityController.tableRowSelectListener}" />
 				<p:ajax event="rowUnselect" update=":crud:panel :crud:toolbar" />
@@ -52,4 +53,5 @@
 		</p:panel>
 	</ui:define>
 </ui:composition>
+</h:body>
 </html>

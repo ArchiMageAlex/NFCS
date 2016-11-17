@@ -71,6 +71,11 @@
 									<bundleDir>lib</bundleDir>
 								</jarModule>
 								<jarModule>
+									<groupId>org.slf4j</groupId>
+									<artifactId>slf4j-jdk14</artifactId>
+									<bundleDir>lib</bundleDir>
+								</jarModule>
+								<jarModule>
 									<groupId>commons-beanutils</groupId>
 									<artifactId>commons-beanutils</artifactId>
 									<bundleDir>lib</bundleDir>

@@ -31,7 +31,7 @@ public class User extends BaseEntity implements Serializable {
 	public User() {
 	}
 
-	@UiLabel("��� ������������")
+	@UiLabel("Name")
 	public String getName() {
 		return this.name;
 	}
@@ -49,7 +49,7 @@ public class User extends BaseEntity implements Serializable {
 		this.password = password;
 	}
 
-	@UiLabel("����")
+	@UiLabel("Roles")
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "users")
 	public List<Role> getRoles() {
 		return this.roles;

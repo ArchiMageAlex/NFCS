@@ -174,7 +174,7 @@ public class ScheduleController implements Serializable {
 			ex.printStackTrace();
 		}*/
 	}
-
+/*
 	public void onEventSelect(ScheduleEntrySelectEvent selectEvent) {
 		this.event = (NFCSScheduleEvent) selectEvent.getScheduleEvent();
 	}
@@ -183,7 +183,7 @@ public class ScheduleController implements Serializable {
 		this.event = new NFCSScheduleEvent("New event onDateSelect",
 				selectEvent.getDate(), selectEvent.getDate(), this.getLogin()
 						.getUser());
-	}
+	}*/
 
 	public void onEventMove(ScheduleEntryMoveEvent event) {
 		Calendar c = GregorianCalendar.getInstance(TimeZone

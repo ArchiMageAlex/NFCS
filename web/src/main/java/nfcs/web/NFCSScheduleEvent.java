@@ -145,4 +145,10 @@ public class NFCSScheduleEvent implements ScheduleEvent, Serializable {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public String getDescription() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -1,6 +1,7 @@
 package nfcs.web;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -15,80 +16,67 @@ import javax.faces.event.ActionListener;
 import nfcs.ejb.MenuEJB;
 import nfcs.model.core.Menu;
 
-import org.primefaces.component.menuitem.MenuItem;
-import org.primefaces.component.submenu.Submenu;
-import org.primefaces.model.DefaultMenuModel;
-import org.primefaces.model.MenuModel;
+import org.primefaces.component.menuitem.UIMenuItem;
+import org.primefaces.component.submenu.UISubmenu;
+import org.primefaces.model.menu.DefaultMenuItem;
+import org.primefaces.model.menu.DefaultMenuModel;
+import org.primefaces.model.menu.DefaultSubMenu;
+import org.primefaces.model.menu.MenuModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @SessionScoped
 @ManagedBean
 public class MenuController implements Serializable {
-
-	private class MenuActionListener implements ActionListener, Serializable {
-		private static final long serialVersionUID = 1L;
-
-		@Override
-		public void processAction(ActionEvent arg0)
-				throws AbortProcessingException {
-			currentComponent = (MenuItem) arg0.getSource();
-		}
-	}
-
+	private static Logger logger = LoggerFactory.getLogger(MenuController.class);
 	private static final long serialVersionUID = 1L;
 	private MenuModel model;
-	private MenuItem currentComponent;
+	private UIMenuItem currentComponent;
 
 	@EJB
 	private MenuEJB menuEJB;
 
 	@PostConstruct
 	public void init() {
+		menuEJB.initMenu();
 		model = new DefaultMenuModel();
-		MenuItem reset = new MenuItem();
+		DefaultSubMenu system = new DefaultSubMenu();
+		system.setLabel("Параметры");
+		DefaultMenuItem reset = new DefaultMenuItem();
 		reset.setValue("Обновить");
-		reset.setActionExpression(ExpressionFactory.newInstance()
-				.createMethodExpression(
-						FacesContext.getCurrentInstance().getELContext(),
-						"#{menuController.resetAction}", String.class,
-						new Class[0]));
-		model.addMenuItem(reset);
+		reset.setCommand("#{menuController.resetAction}");
+		system.addElement(reset);		system.setExpanded(false);
+		model.addElement(system);
+
+		DefaultSubMenu entities = new DefaultSubMenu();
+		entities.setLabel("Сущности");
+
+		model.addElement(entities);
 
 		for (Menu menu : menuEJB.getRootMenu()) {
-			Submenu item = new Submenu();
-			item.setLabel(menu.getName());
+			List<Menu> children = menuEJB.getChildren(menu);
+			
+			if (children.size() > 0) {
+				DefaultSubMenu item = new DefaultSubMenu();
+				item.setLabel(menu.getName());
 
-			for (Menu child : menuEJB.getChildren(menu)) {
-				item.getChildren().add(fillChildren(child));
+				for (Menu child : children) {
+					getNewMenuItem(item, child);
+				}
+
+				entities.addElement(item);
+			} else {
+				getNewMenuItem(entities, menu);
 			}
-
-			model.addSubmenu(item);
 		}
 	}
 
-	private MenuItem fillChildren(Menu menuentity) {
-		MenuItem item = newMenuItem(menuentity.getName(),
-				"/secure/admin/crud.xhtml?faces-redirect=true&entityClassName="
-						+ menuentity.getEntityName());
-
-		for (Menu child : menuEJB.getChildren(menuentity)) {
-			item.getChildren().add(fillChildren(child));
-		}
-
-		return item;
-	}
-
-	private MenuItem newMenuItem(String name, String url) {
-		MenuItem item = new MenuItem();
-		item.setId(name);
-		item.setValue(name);
-		item.setUrl(url);
-		item.setActionExpression(ExpressionFactory.newInstance()
-				.createMethodExpression(
-						FacesContext.getCurrentInstance().getELContext(),
-						"#{menuController.menuAction}", String.class,
-						new Class[0]));
-		item.addActionListener(new MenuActionListener());
-		return item;
+	private void getNewMenuItem(DefaultSubMenu uimenu, Menu menu) {
+		DefaultMenuItem childmenu = new DefaultMenuItem();
+		childmenu.setCommand("#{menuController.menuAction}");
+		childmenu.setValue(menu.getName());
+		childmenu.setUrl("/secure/admin/crud.xhtml?faces-redirect=true&entityClassName=" + menu.getEntityName());
+		uimenu.addElement(childmenu);
 	}
 
 	public MenuModel getMenuModel() {
@@ -101,6 +89,6 @@ public class MenuController implements Serializable {
 
 	public String resetAction() {
 		init();
-		return "/";
+		return "/welcome.xhtml";
 	}
 }

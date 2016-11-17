@@ -27,7 +27,7 @@ public class Subject extends BaseEntity implements Serializable {
 	}
 
 	@Column
-	@UiLabel("��������/���")
+	@UiLabel("Name")
 	public String getName() {
 		return this.name;
 	}
@@ -42,13 +42,13 @@ public class Subject extends BaseEntity implements Serializable {
 
 	@ManyToOne(optional = true, cascade={CascadeType.ALL})
 	@JoinColumn(name = "schedules", nullable = true)
-	@UiLabel("������")
+	@UiLabel("Schedules")
 	public Report getSchedules() {
 		return schedules;
 	}
 
 	@OneToMany(mappedBy="subject", cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
-	@UiLabel("��������")
+	@UiLabel("Contacts")
 	public List<Transport> getContacts() {
 		return contacts;
 	}

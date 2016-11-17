@@ -69,4 +69,10 @@ public class NFCSScheduleModel implements ScheduleModel, Serializable {
 		events.clear();
 	}
 
+	@Override
+	public boolean isEventLimit() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

@@ -9,6 +9,8 @@ import java.util.Properties;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -16,21 +18,28 @@ import javax.faces.context.FacesContext;
 import nfcs.ejb.EJB;
 import org.primefaces.component.datatable.DataTable;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.LazyDataModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import nfcs.model.core.BaseEntity;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class EntityController implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private static Logger logger = LoggerFactory.getLogger(EntityController.class);
+
 	protected Class<? extends BaseEntity> entityClass;
-	protected List<? extends BaseEntity> entities;
 	protected List<ColumnModel> columns = new ArrayList<ColumnModel>();
 
 	@javax.ejb.EJB(name = "EJB")
 	protected EJB ejb;
 	private BaseEntity currentEntity;
 	private BaseEntity selection;
+
+	@ManagedProperty("#{lazyEntityDataModel}")
+	private LazyEntityDataModel lazyDataModel;
 
 	private String entityClassName;
 
@@ -40,10 +49,9 @@ public class EntityController implements Serializable {
 
 	@PostConstruct
 	public void controllerSetup() {
-		ExternalContext extContext = FacesContext.getCurrentInstance()
-				.getExternalContext();
-		String entity = extContext.getRequestParameterMap().get(
-				"entityClassName");
+		logger.debug("Start init of EntityController");
+		ExternalContext extContext = FacesContext.getCurrentInstance().getExternalContext();
+		String entity = extContext.getRequestParameterMap().get("entityClassName");
 		this.setEntityClassName(entity);
 		ejb.setEntityClass(this.getEntityClassName());
 		this.entityClass = ejb.getEntityClass();
@@ -58,16 +66,11 @@ public class EntityController implements Serializable {
 				columns.add(new ColumnModel(props.getProperty(key), key));
 			}
 		}
-		this.setEntities(this.ejb.getAll());
+
+		this.getLazyDataModel().setEntityClass(entity);
+		this.getLazyDataModel().init();
+		logger.debug("Data filled for entity " + entity);
 		this.setCurrentEntity(null);
-	}
-
-	public List<? extends BaseEntity> getEntities() {
-		return entities;
-	}
-
-	public void setEntities(List<? extends BaseEntity> entities) {
-		this.entities = entities;
 	}
 
 	public List<ColumnModel> getColumns() {
@@ -123,9 +126,10 @@ public class EntityController implements Serializable {
 					new FacesMessage(e.getLocalizedMessage()));
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			context.addMessage("������ ��������", new FacesMessage(
-					"���������� ������� ����������� ��-��������� ��� ������ "
-							+ this.entityClass.getName()));
+			context.addMessage("������ ��������",
+					new FacesMessage(
+							"���������� ������� ����������� ��-��������� ��� ������ "
+									+ this.entityClass.getName()));
 			e.printStackTrace();
 		}
 		return "";
@@ -144,10 +148,8 @@ public class EntityController implements Serializable {
 	}
 
 	private void updateTable(BaseEntity current) {
-		this.setEntities(this.ejb.getAll());
 		FacesContext context = FacesContext.getCurrentInstance();
-		DataTable dataTable = (DataTable) context.getViewRoot().findComponent(
-				"crud:table");
+		DataTable dataTable = (DataTable) context.getViewRoot().findComponent("crud:table");
 		dataTable.setSelection(current);
 		dataTable.processUpdates(context);
 		this.setCurrentEntity(current);
@@ -163,5 +165,27 @@ public class EntityController implements Serializable {
 
 	public void tableRowUnSelectListener(SelectEvent event) {
 		this.setCurrentEntity(null);
+	}
+
+	public LazyEntityDataModel getLazyDataModel() {
+		if (null != lazyDataModel) {
+			if (null != lazyDataModel.getEntityClass()) {
+				if (!lazyDataModel.getEntityClass().equals(this.getEntityClassName())) {
+					logger.info("Get refilled lazy data model");
+					lazyDataModel.setEntityClass(this.getEntityClassName());
+					lazyDataModel.init();
+				}
+			} else {
+				logger.info("Get filled lazy data model");
+				lazyDataModel.setEntityClass(this.getEntityClassName());
+				lazyDataModel.init();
+			}
+		}
+
+		return lazyDataModel;
+	}
+
+	public void setLazyDataModel(LazyEntityDataModel lazyDataModel) {
+		this.lazyDataModel = lazyDataModel;
 	}
 }
