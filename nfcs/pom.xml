@@ -37,7 +37,6 @@
 									roles.name user_role, 'Roles' from roles right join roles_users
 									on roles.id=roles_users.roles_id right join users on
 									users.id=roles_users.users_id where users.name=?")]}])</command>
-								<command>reload</command>
 							</commands>
 						</configuration>
 					</plugin>
