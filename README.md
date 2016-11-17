@@ -5,11 +5,16 @@ with built-in core JavaEE container functionality without JavaEE complexity.
 System purpose - to bypass boilerplate code with concentrating on business entities, logic and processes development.
 
 Used core technologies are:
-1. JavaEE 6.x full stack.
+1. JavaEE 7.x full stack.
 2. Metawidget 3.5
 3. JPA 2.1
+4. Primefaces 6.0
 
 History
+
+2016.11.17
+Moved to Primefaces 6.0
+Some issues are in progress with Schedule and Datatable components
 
 2014.02.12
 New features:
