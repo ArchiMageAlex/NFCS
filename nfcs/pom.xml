@@ -19,7 +19,6 @@
 							<!-- <hostname>192.168.99.100</hostname> -->
 							<password>admin</password>
 							<skip>false</skip>
-							<jboss-home>~/NFCS/nfcs/wildfly-run/wildfly-10.1.0.Final</jboss-home>
 							<commands>
 								<command>module add --name=org.postgres
 									--resources=postgresql-9.4.1212.jar
