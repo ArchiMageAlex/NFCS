@@ -19,7 +19,48 @@
 							<!-- <hostname>192.168.99.100</hostname> -->
 							<password>admin</password>
 							<skip>false</skip>
+							<commands>
+								<command>module add --name=org.postgres
+									--resources=postgresql-9.4.1212.jar
+									--dependencies=javax.api,javax.transaction.api</command>
+								<command>/subsystem=datasources/jdbc-driver=postgres:add(driver-name=postgres,driver-module-name=org.postgres,driver-class-name=org.postgresql.Driver)</command>
+								<command>data-source add
+									--jndi-name=java:/jboss/datasources/PostgreSQLDS
+									--name=PostgreSQLPool
+									--connection-url=jdbc:postgresql://192.168.99.100:5432/postgres
+									--driver-name=postgres --user-name=postgres --max-pool-size=50</command>
+								<command>/subsystem=security/security-domain=DBAuth/:add(cache-type=default)</command>
+								<command>/subsystem=security/security-domain=DBAuth/authentication=classic:add(login-modules=[{"code"=>"Database",
+									"flag"=>"required",
+									"module-options"=>[("dsJndiName"=>"java:jboss/PostgreSQLDS"),("principalsQuery"=>"select
+									password from USERS where name=?"),("rolesQuery"=>"select
+									roles.name user_role, 'Roles' from roles right join roles_users
+									on roles.id=roles_users.roles_id right join users on
+									users.id=roles_users.users_id where users.name=?")]}])</command>
+							</commands>
 						</configuration>
+						<executions>
+							<execution>
+								<phase>deploy</phase>
+								<goals>
+									<goal>deploy</goal>
+								</goals>
+
+								<configuration>
+									<add-user>
+										<users>
+											<user>
+												<username>admin</username>
+												<password>admin</password>
+											</user>
+										</users>
+									</add-user>
+									<groupId>postgresql</groupId>
+									<artifactId>postgresql</artifactId>
+									<name>postgresql.jar</name>
+								</configuration>
+							</execution>
+						</executions>
 					</plugin>
 					<plugin>
 						<artifactId>maven-ear-plugin</artifactId>

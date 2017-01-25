@@ -11,14 +11,12 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import nfcs.ejb.EJB;
 import org.primefaces.component.datatable.DataTable;
 import org.primefaces.event.SelectEvent;
-import org.primefaces.model.LazyDataModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -122,13 +120,12 @@ public class EntityController implements Serializable {
 			this.setSelection(this.getCurrentEntity());
 			updateTable(this.getCurrentEntity());
 		} catch (InstantiationException e) {
-			context.addMessage("������ ��������",
+			context.addMessage("Cannot create entity",
 					new FacesMessage(e.getLocalizedMessage()));
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			context.addMessage("������ ��������",
-					new FacesMessage(
-							"���������� ������� ����������� ��-��������� ��� ������ "
+			context.addMessage("Access denied for entity creation",
+					new FacesMessage(e.getLocalizedMessage()
 									+ this.entityClass.getName()));
 			e.printStackTrace();
 		}
