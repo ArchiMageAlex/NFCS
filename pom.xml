@@ -8,7 +8,6 @@
 	<packaging>pom</packaging>
 
 	<name>parent</name>
-
 	<url>http://nfsrepschedule.sourceforge.net/</url>
 	<scm>
 		<connection>https://nfsrepschedule.svn.sourceforge.net/svnroot/nfsrepschedule/trunk</connection>
